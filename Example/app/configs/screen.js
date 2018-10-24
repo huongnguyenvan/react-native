@@ -1,6 +1,7 @@
 const SCREENS = {
 	HOME: "HOME",
-	STYLES: "STYLES"
+	STYLES: "STYLES",
+	COMPONENT: "COMPONENT"
 }
 
 export default SCREENS;

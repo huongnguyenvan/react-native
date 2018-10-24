@@ -284,16 +284,17 @@ const styles = StyleSheet.create({
 
 ```
 
-Giống như một ứng dụng web cơ bản, React-Native sử dụng một số thẻ css để vẽ những gì bạn muốn. Để trau dồi những style này một là bạn quen thuộc với css hoặc là làm nhiều bạn sẽ tìm hiểu những style bạn muốn và sẽ làm ứng dụng của bạn đẹp hơn.
+Giống như một ứng dụng web cơ bản, React-Native sử dụng một số thẻ css để vẽ những gì bạn muốn. Nếu bạn là lập trình web quen thuộc với css thì việc thiết kế này khá đơn giản. Để trau dồi những khả năng này chỉ có cách là làm nhiều bạn sẽ tìm hiểu những style bạn muốn và sẽ làm ứng dụng của bạn đẹp hơn.
 
 Ở ví dụ trên bạn có thể thay đổi các thuộc tính của style rồi reload lại để thấy sự thay đổi nhé.
 
-Trong ví dụ thư mục Home tôi đã chia phần Style qua một file khác để dễ quản lý. Bạn có thể vào đó, thử thay đổi, xóa sửa để biết được thuộc tính nào dùng để làm gì nhé. Làm nhiều phần này thì sẽ có kinh nghiệm thiết kế đẹp thôi.
+Trong ví dụ thư mục Home tôi đã chia phần Style qua một file khác để dễ quản lý (Từ các ví dụ sau trở đi, tôi sẽ chia phần style này sang 1 file khác để dễ quản lý). Bạn có thể vào đó, thử thay đổi, xóa sửa để biết được thuộc tính nào dùng để làm gì nhé. Làm nhiều phần này thì sẽ có kinh nghiệm thiết kế đẹp thôi. 
 
 Một vài lưu ý:
 
-- Bạn nên biết thuộc tính nào dùng để làm gì, sử dụng tối ưu để hiệu quả nhất.
+- Bạn nên biết thuộc tính nào dùng để làm gì, sử dụng tối ưu để hiệu quả nhất (Có thể copy code của ai đó nhưng nên hiểu dòng style nào làm việc gì).
 - Không nên quá rườm rà code ngắn nhưng đạt được yêu cầu là tốt nhất.
+
 
 
 ## 8. Kỹ thuật Debug cơ bản
@@ -315,11 +316,136 @@ react-native log-android
 ```
 
 ## 9. Các Component thường sử dụng
-### 9.1. Text
-### 9.2. Button
+Dưới đây là code demo những component cơ bản thường sử dụng. Bạn có thể code lại, copy hoặc chạy demo từ example.
+
+```javascript
+import React from 'react';
+import { Image, View, Text, Button, TouchableOpacity, FlatList } from 'react-native';
+import Styles from './styles';
+import { Colors } from '../../../configs/style';
+
+export class Components extends React.Component {
+	//Header ứng dụng (tùy chọn)
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: "COMPONENT",
+            headerStyle: {
+                backgroundColor: Colors.primary
+            },
+            headerTintColor: Colors.white,
+            headerTitleStyle: {
+                alignSelf: 'center'
+            }
+        };
+    };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            message: "Message 2",
+            listData: [
+                {
+                    image: require('../../../assets/images/ios.png'),
+                    title: "IOS"
+                },
+                {
+                    image: require('../../../assets/images/android.png'),
+                    title: "Android"
+                },
+                {
+                    image: require('../../../assets/images/react-native.png'),
+                    title: "React Native"
+                }
+            ]
+        }
+        this.clickButton = 0;
+        this.clickTouchAbleOpecity = 0;
+    }
+    
+    onPressButtonDemo() {
+        this.clickButton++;
+        this.setState({
+            message: "Clicked Button: " + this.clickButton
+        })
+    }
+
+    onPressTouchableOpacityDemo() {
+        this.clickTouchAbleOpecity++;
+        this.setState({
+            message: "Clicked TouchableOpacity: " + this.clickTouchAbleOpecity
+        })
+    }
+
+    render() {
+        return (
+            <View style={Styles.container}>
+                {/* Hiển thị Một message lên màn hình */}
+                <Text style={Styles.textMessage}>WELCOME TO TEXT OF REACT-NATIVE</Text>
+                <View style={Styles.containImage}>
+                    {/* Hiển thị ảnh từ local resource */}
+                    <Image
+                        style={Styles.imgLogo}  /* Style của ảnh */
+                        resizeMode={'contain'}  /* chế độ hiển thị (center, contain, cover, repeat, stretch )  của ảnh */
+                        source={require('../../../assets/images/react-native.png')}
+                    />
+
+                    {/* Hiển thị ảnh từ web/server */}
+                    <Image
+                        style={Styles.imgLogo}
+                        resizeMode={'contain'}
+                        source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
+                    />
+                </View>
+                {/* In một giá trị của state lên màn hình */}
+                <Text style={Styles.textMessage}>{this.state.message}</Text>
+
+                {/* Sử dụng Button với chức năng press vào nút */}
+                <Button
+                    onPress={() => this.onPressButtonDemo()}
+                    title="Click Me!"
+                    color="#841584"
+                />
+
+                {/* Sử dụng TouchableOpacity với chức năng press giống như button */}
+                <TouchableOpacity
+                    style={Styles.btnStyle}
+                    onPress={() => this.onPressTouchableOpacityDemo()}>
+                    <Text style={Styles.textAction}>Touchable Opacity</Text>
+                </TouchableOpacity>
+
+
+                {/* Sử dụng FlatList để hiển thị ra một danh sách */}
+                <FlatList
+                    data={this.state.listData}
+                    renderItem={({ item }) => this.renderItem(item)}
+                />
+            </View>
+        );
+    }
+
+    /* Hiển thị chi tiết 1 item như thế nào */
+    renderItem(item) {
+        return (
+            <View style={Styles.containerItem}>
+                <Image
+                    style={Styles.imgLogo} 
+                    resizeMode={'contain'}  
+                    source={item.image}
+                />
+                <Text>{item.title}</Text>
+            </View>
+        )
+    }
+}
+
+```
+
+### 9.1. View
+### 9.2. Text
 ### 9.3. Image
-### 9.4. Flatlist
-### 9.5. ....
+### 9.4. Button
+### 9.5. TouchableOpacity
+### 9.6. Flatlist
 
 ## 10. Prop và cách truyền dữ liệu giữa các View (Screen)
 
