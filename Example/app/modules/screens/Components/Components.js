@@ -97,6 +97,7 @@ export class Components extends React.Component {
                 <FlatList
                     data={this.state.listData}
                     renderItem={({ item }) => this.renderItem(item)}
+                    keyExtractor={(item, index) => index.toString()}
                 />
             </View>
         );

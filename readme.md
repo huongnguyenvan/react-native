@@ -418,6 +418,7 @@ export class Components extends React.Component {
                 <FlatList
                     data={this.state.listData}
                     renderItem={({ item }) => this.renderItem(item)}
+                    keyExtractor={(item, index) => index.toString()}
                 />
             </View>
         );
@@ -440,12 +441,130 @@ export class Components extends React.Component {
 
 ```
 
-### 9.1. View
+Sau khi chạy Demo click vào Component ta được UI như sau
+![](images/demo_component.jpg)
+
+### 9.1. View 
+Là một component cũng thường xuyên được sử dụng. Thường được sử dụng với mục đích chia các view con theo hàng dọc hoặc hàng ngang dựa vào thuộc tính flexDirection trong style là 'column/row' (dọc / ngang), hoặc sử dụng để chứa nhiều view con hoặc khi cần in ra màn hình một view không hiển thị gì hết ví dụ như trong cấu trúc toán tử:
+
+```
+{
+	(Điều kiện) ?  <Text> Text Message <Text> : <View/>
+}
+```
+flex: 1 ở style sẽ giúp kéo view rộng hết khung chứa có thể.
+
 ### 9.2. Text
+Dùng để hiển thị 1 message lên màn hình. Có thể sử dụng text cố định hoặc in nội dung của một biến lên màn hình 
+```<Text>{variable_here}<Text>```
 ### 9.3. Image
+Dùng để hiển thị hình ảnh lên màn hình. Có 3 cách hiển thị:
+
+- Hiển thị ảnh Local:
+
+```
+	<Image
+		source={require('/react-native/img/favicon.png')}
+	/>
+```
+
+- Hiển thị ảnh từ url:
+
+```
+	<Image
+          style={{width: 50, height: 50}}
+          source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
+        />
+```
+
+- Hiển thị ảnh base 64:
+
+```javascript
+	  <Image
+          style={{width: 66, height: 58}}
+          source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
+        />
+```
+
+
+Resize Mode quen thuộc:
+
+- cover: (mặc định) Hình ảnh sẽ giữ nguyên tỷ lệ. Ảnh sẽ lớn hơn hoặc bằng khung chứa.
+- contain: Hình ảnh vẫn giữ nguyên tỷ lệ. Ảnh sẽ nhỏ hơn hoặc bằng khung chứa
+- center: Căn giữa hình ảnh theo 2 chiều. Lấy phần ở giữa, gần giống với cover.
+
+- repeat: Lặp lại hình ảnh để che hết phần kích thước ô chứa.
+- stretch: Thay đổi tỷ lệ hình ảnh để kéo dãn bằng với ô chứa.
+
+
 ### 9.4. Button
+Cách sử dụng một Button
+
+
+```javascript
+
+onPressButtonDemo(){
+	console.log("Click Button")
+}
+
+....
+<Button
+ 	onPress={() => this.onPressButtonDemo()}
+	title="Click Me!"
+	color="#841584"
+/>
+
+```
+
+Thông thường mình ít khi sử dụng Button vì lý do custom style nó không hoạt động đúng với cả Android và IOS vì vậy nên mình thường sử dụng TouchableOpacity hơn.
+Nhưng lưu ý cách sử dụng sự kiện onPress ```onPress={() => this.onPressButtonDemo()}``` Vui lòng viết theo cấu trúc này để giảm thiểu lỗi hoặc là phải binding hàm trong contrucstor trước lúc sử dụng. Sự kiện onPress chỉ có một số component hỗ trợ, Text thì không hỗ trợ nên nếu muốn sử dụng onPress cho Text thì đọc phần TouchableOpacity phía dưới nhé.
+
+
 ### 9.5. TouchableOpacity
+Thông thường mình thay thế việc sử dụng Button bằng TouchableOpacity để việc định dạng style giống nhau cho cả android và ios, TouchableOpacity có thể chứa bất kỳ view con nào, và nhớ lưu ý cách dùng sự kiện onPress giống như Button nhé.
+
+```javascript
+ <TouchableOpacity
+ 	style={Styles.btnStyle}
+ 	onPress={() => this.onPressTouchableOpacityDemo()}>
+ 	<Text style={Styles.textAction}>Click Me</Text>
+</TouchableOpacity>
+```
+
 ### 9.6. Flatlist
+Đây là Component thường được sử dụng để hiển thị 1 danh sách lên màn hình. <br>Cách dùng:
+
+```javascript
+<FlatList
+	data={this.state.listData}
+	renderItem={({ item }) => this.renderItem(item)}
+	keyExtractor={(item, index) => index.toString()}
+/>
+
+/* Hiển thị chi tiết 1 item như thế nào */
+renderItem(item) {
+    return (
+        <View style={Styles.containerItem}>
+            <Image
+                style={Styles.imgLogo} 
+                resizeMode={'contain'}  
+                source={item.image}
+            />
+            <Text>{item.title}</Text>
+        </View>
+    )
+}
+```
+
+Một vài lưu ý khi sử dụng Flatlist:
+
+- Khi một thành phần data (ví dụ data[0] = ...) của bạn thay đổi thường thì không vẽ lại UI cho nên bạn sẽ cần thêm một thuộc tính là ```extraData={this.state}```. Lúc này mỗi lần state thay đổi thì danh sách lại được vẽ lại.
+
+- Có thể sử dụng Flatlist để làm như GridView trong android dựa vào thuộc tính numColumns={colum} (colum là số cột). Nhưng bạn sẽ cần phải tính toán width, height của mỗi colum để hiển thị đẹp nhất (Không có sẵn như fill_parent trong android).
+
+
+Các component ở trên mình chỉ mang tính chất giới thiệu để các bạn tìm hiểu. Để hiểu rõ hơn cũng như tìm hiểu thêm về các thuộc tính của mỗi component thì vui lòng đọc riêng tài liệu của các Component nhé.
+Mỗi component sẽ có nhiều thuộc tính khác để hỗ trợ bạn làm UI tốt và mượt nhất có thể.
 
 ## 10. Prop và cách truyền dữ liệu giữa các View (Screen)
 
