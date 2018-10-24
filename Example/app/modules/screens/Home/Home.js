@@ -29,10 +29,19 @@ export class Home extends React.Component {
         this.state = {};
     }
 
+
+    onPressStyle() {
+        console.log("ABCD");
+        this.props.navigation.navigate("STYLES")
+    }
+
     render() {
         return (
             <View style={Styles.container}>
-                <Text style={Styles.textVersion}>{"Current version 1.0"}</Text>
+                <TouchableOpacity style={Styles.btnStyle} onPress={() => this.onPressStyle()}>
+                    <Text style={Styles.textVersion}>STYLES</Text>
+                </TouchableOpacity>
+
             </View>
         );
     }

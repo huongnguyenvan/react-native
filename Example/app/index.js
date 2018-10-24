@@ -7,6 +7,9 @@ const AppNavigator = StackNavigator({
     HOME: {
         screen: Screens.Home
     },
+    STYLES: {
+        screen: Screens.StyleDemo
+    }
 }, {
         headerMode: "screen"
     });

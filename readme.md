@@ -227,9 +227,10 @@ this.setState({
 	message: "Chào mừng",
 	key: "Value",
 })
-console.log(this.state.message) (không nên sử dụng như vậy)
-// biến truyền vào cho hàm setState là một đối tượng có dạng key: value.
+console.log(this.state.message) //không nên
 // không sử dụng this.state ngay sau khi vừa set xong
+// biến truyền vào cho hàm setState là một đối tượng có dạng key: value.
+
 ```
 
 Có thể sử dụng callback để check dữ liệu hoặc xử lý một số tác vụ sau khi thay đổi trạng thái
