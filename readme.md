@@ -464,27 +464,27 @@ Dùng để hiển thị hình ảnh lên màn hình. Có 3 cách hiển thị:
 - Hiển thị ảnh Local:
 
 ```
-	<Image
-		source={require('/react-native/img/favicon.png')}
-	/>
+<Image
+	source={require('/react-native/img/favicon.png')}
+/>
 ```
 
 - Hiển thị ảnh từ url:
 
 ```
-	<Image
-          style={{width: 50, height: 50}}
-          source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
-        />
+<Image
+	style={{width: 50, height: 50}}
+	source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
+/>
 ```
 
 - Hiển thị ảnh base 64:
 
 ```javascript
-	  <Image
-          style={{width: 66, height: 58}}
-          source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
-        />
+<Image
+	style={{width: 66, height: 58}}
+	source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
+/>
 ```
 
 
@@ -528,7 +528,7 @@ Thông thường mình thay thế việc sử dụng Button bằng TouchableOpac
  <TouchableOpacity
  	style={Styles.btnStyle}
  	onPress={() => this.onPressTouchableOpacityDemo()}>
- 	<Text style={Styles.textAction}>Click Me</Text>
+ 		<Text style={Styles.textAction}>Click Me</Text>
 </TouchableOpacity>
 ```
 
