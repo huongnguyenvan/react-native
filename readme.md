@@ -442,6 +442,7 @@ export class Components extends React.Component {
 ```
 
 Sau khi chạy Demo click vào Component ta được UI như sau
+
 ![](images/demo_component.jpg)
 
 ### 9.1. View 
