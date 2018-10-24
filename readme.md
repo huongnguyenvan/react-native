@@ -255,6 +255,46 @@ this.setState({
 
 ## 7. Thiết kế View (Style)
 
+Sau đây là một đoạn code Demo về Style của ứng dụng React-Native. Code có sẵn trong Example (Example/app/modules/screens/Home/StyleDemo)
+
+```javascript
+export class StyleDemo extends React.Component {
+    render() {
+        return (
+            <View>
+                <Text style={styles.red}>just red</Text>
+                <Text style={styles.bigblue}>just bigblue</Text>
+                <Text style={[styles.bigblue, styles.red]}>bigblue, then red</Text>
+                <Text style={[styles.red, styles.bigblue]}>red, then bigblue</Text>
+            </View>
+        );
+    }
+}
+
+const styles = StyleSheet.create({
+    bigblue: {
+        color: 'blue',
+        fontWeight: 'bold',
+        fontSize: 30,
+    },
+    red: {
+        color: 'red',
+    },
+});
+
+```
+
+Giống như một ứng dụng web cơ bản, React-Native sử dụng một số thẻ css để vẽ những gì bạn muốn. Để trau dồi những style này một là bạn quen thuộc với css hoặc là làm nhiều bạn sẽ tìm hiểu những style bạn muốn và sẽ làm ứng dụng của bạn đẹp hơn.
+
+Ở ví dụ trên bạn có thể thay đổi các thuộc tính của style rồi reload lại để thấy sự thay đổi nhé.
+
+Trong ví dụ thư mục Home tôi đã chia phần Style qua một file khác để dễ quản lý. Bạn có thể vào đó, thử thay đổi, xóa sửa để biết được thuộc tính nào dùng để làm gì nhé. Làm nhiều phần này thì sẽ có kinh nghiệm thiết kế đẹp thôi.
+
+Một vài lưu ý:
+
+- Bạn nên biết thuộc tính nào dùng để làm gì, sử dụng tối ưu để hiệu quả nhất.
+- Không nên quá rườm rà code ngắn nhưng đạt được yêu cầu là tốt nhất.
+
 
 ## 8. Kỹ thuật Debug cơ bản
 
