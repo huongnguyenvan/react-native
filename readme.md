@@ -54,8 +54,16 @@ Lưu ý: Trên hệ điều hành windowns chỉ có thể build ứng dụng tr
 - **Bước 5**: Cài đặt Xcode: truy cập App Store trên MACOS để cài đặt Xcode.
 - **Bước 6** (option): Nếu bạn xây dựng ứng dụng android sử dụng hệ điều hành MACOS thì bạn cần cài đặt thêm các gói như JDK, Android Studio, Android SDK. (xem thêm phần cài đặt cho Windonws để hiểu rõ hơn.)
 
+## 3. Các IDE khuyên dùng
 
-## 3. Khởi tạo dự án đầu tiên
+- Code: Hiện tại mình sử dụng Visual Studio Code các bạn có thể download về và cài đặt tại <https://code.visualstudio.com/> <br> Các bạn cũng có thể sử dụng bất kỳ IDE nào các bạn thích như Sublime Text Atom, Vim Editer...
+- Build ứng dụng: 
+ - IOS: sử dụng Xcode (search trên store apple nhé)
+ - Android: sử dụng Android studio <https://developer.android.com/studio/>
+
+P/s: Nếu sử dụng MAC thì nên dùng Xcode để chạy ứng dụng. Bởi vì một số lý do như: Run các lần sau nhanh hơn, xem log debug mà không cần bật chức năng Debug JS Remotely và quan trọng là làm quen với một số chức năng của Xcode để lúc xảy ra lỗi fix lỗi nhanh hơn. <br> Với Android thì có một vài trở ngại khi dùng Android studio như việc run mà không dùng code react-native mới nhất, chức năng host reloading cũng khó hoạt động.
+
+## 4. Khởi tạo dự án đầu tiên
 - **Bước 1**: Khởi tạo dự án: mở Terminal (cmd) sau đó gõ lệnh này vào  (cd vào thư mục bạn muốn tạo dự án trước)<br>
 ```react-native init ProjectName```
 
@@ -65,7 +73,37 @@ Lưu ý: Trên hệ điều hành windowns chỉ có thể build ứng dụng tr
 - **Bước 3**: Chạy ứng dụng trên hệ điều hành:<br>
 IOS: ```	react-native run-ios``` <br>Android: ```react-native run-android```
 
-## 4. Các thành phần cơ bản của dự án
+Khi chạy lệnh này hệ điều hành sẽ tạo một server local để build code react của bạn. Kèm theo đó là chạy các lệnh để build ứng dụng.<br>Bạn cũng có thể mở file /ios/ProjectName.xcodeproj bằng Xcode để khởi chạy ứng dụng, hoặc mở nguyên thư mục android bằng Android studio để khởi chạy ứng dụng.
+
+- **Hiển thị Menu điều khiển**:
+ - Command + D (hoặc lắc điện thoại IOS) để hiển thị menu điều khiển khi run debug ứng dụng trên MacOS.
+ - ctrl + D hoặc phím menu để hiển thị menu điều khiển khi run debug ứng dụng trên Windown.
+ - Command + R để reload lại source code máy ảo IOS
+ - R + R để reload lại source code máy ảo Android.
+
+- **Một vài lệnh vui vui để sửa lỗi**  (Bật terminal or cmd trong dự án vừa khởi tạo)
+
+ - Không khởi tạo server để build khi run debug trên android thì chạy
+ ```react-native start```
+ 
+ - Khi run Android mà không sử dụng code react-native mới nhất thì chạy dòng này (Build toàn bộ source của bạn thành 1 file và đặt nó vào trong assets, tạo các resource android tương ứng mà bạn sử dụng).
+```
+react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+```
+ - Khi general APK mà bị lỗi double resource thì xóa thư mục drawable trong android/app/src/main/res thì sẽ build được.
+ 
+ - Khi run app ios bị lỗi "Build input file cannot be found: '../Example/node_modules/react-native/third-party/double-conversion-1.1.6/src/strtod.cc'" thì chạy 2 dòng lệnh sau:
+ 
+ ```
+cd node_modules/react-native/scripts && ./ios-install-third-party.sh && cd ../../../
+cd node_modules/react-native/third-party/glog-0.3.5/ && ../../scripts/ios-configure-glog.sh && cd ../../../../
+```
+Chú ý version phiên bản glog-0.3.5 mà bạn đang sử dụng.
+
+
+- **Khuyến cáo**: Sau những lần tìm hiểu và phát triển ứng dụng thì tác giả khuyến cáo không nên sử dụng Expo (framework của react) để phát triển ứng dụng đơn giản. Bởi vì dự án của bạn sẽ nặng lên, bạn sẽ khó quản lý permission và các thư viện đi kèm.
+
+## 5. Các thành phần cơ bản của dự án
 Cấu trúc thư mục mà bạn nhìn thấy có thể sẽ như dưới đây (tùy version react-native hiện tại của bạn). Hình dưới đây không bao gồm một vài file bị ẩn thuộc cấu hình của react-native<br>
 ![](images/first-project.jpg)
 
@@ -86,10 +124,10 @@ Cấu trúc thư mục mà bạn nhìn thấy có thể sẽ như dưới đây 
 - **File App.js** là một component mặc định có sử dụng một số Component khác như Text, View...
 
 
-## 5. Component trong React-Native
+## 6. Component trong React-Native
 Component là một thành phần cơ bản trong ứng dụng react-native. Mọi view, screen đều được kế thừa từ lớp component này.
 
-### 5.1. Vòng đời của component
+### 6.1. Vòng đời của component
 ![](images/life-circle.png)
 <br><em>(Nguồn:: internet)</em>
 
@@ -117,7 +155,7 @@ Component là một thành phần cơ bản trong ứng dụng react-native. M�
 
 
 
-### 5.2. Các thành phần cơ bản của component
+### 6.2. Các thành phần cơ bản của component
 Sau đây là chương trình mẫu cơ bản để ta hiểu được các thành phần của một Component
 
 ```javascript
@@ -179,9 +217,10 @@ export default class App extends Component {
 }
 ```
 
-### 5.3. Một số hàm đặc biệt
+### 6.3. Một số hàm đặc biệt
 
-- **Hàm this.setState()** - Hàm dùng để thay đổi state của component. Đây là phương thức chính để cập nhật giao diện người dùng. Lưu ý: hàm này chạy bất đồng bộ nên chúng ta không nên đọc giá trị sau khi gọi hàm này. <br>Cách sử dụng: 
+- **Hàm this.setState()** - Hàm dùng để thay đổi state của component. Đây là phương thức chính để cập nhật giao diện người dùng. Khi hàm này thực thi xong thì hàm **render()** sẽ được tự động gọi lại. **Những giá trị nào của state thay đổi thì chỉ những thành phần có sử dụng biến state tương ứng đó được gọi để vẽ lại UI**.
+<br>Lưu ý: hàm này chạy bất đồng bộ nên chúng ta không nên đọc giá trị sau khi gọi hàm này. <br>Cách sử dụng: 
 
 ```javascript
 this.setState({
@@ -207,49 +246,72 @@ this.setState({
 
 - **Hàm forceUpdate()** - Mặc định hàm render() sẽ được gọi khi props hoặc state thay đổi. Nhưng nếu một vài thành phần UI sử dụng một số dữ liệu khác state hoặc prop muốn thay đổi, thì chúng ta cần thông báo cho React biết để vẽ lại toàn bộ bằng cách gọi hàm forceUpdate().
 
-### 5.4. Một vài lưu ý nhỏ khi dùng React-Native
+### 6.4. Một vài lưu ý nhỏ khi dùng React-Native
 - Dữ liệu cần in ra màn hình và cần thay đổi lại UI khi nó thay đổi thì đặt vào state.
-- Dữ liệu tĩnh không cần thay đổi UI khi nó thay đổi thì có thể dùng ```this.xxx``` như vậy biến này có thể thực hiện thao tác = (gán) và sử dụng trực tiếp như các biến thông thường.
+- Dữ liệu không cần thay đổi UI khi nó thay đổi thì có thể dùng ```this.xxx``` như vậy biến này có thể thực hiện thao tác = (gán) và sử dụng trực tiếp như các biến thông thường.
 - Dữ liệu trong prop thì không nên thay đổi.
-- Trong **state** chỉ nên chứa dữ liệu, không nên chứa các **View / Component** vào trong state. Làm như vậy có thể gây double dữ liệu và việc quản lý UI trở nên phức tạp hơn nhiều khó tùy biến sau này.
+- Trong **state** chỉ nên chứa dữ liệu, không nên chứa các **View / Component** vào trong state. Làm như vậy có thể gây double dữ liệu và việc quản lý UI trở nên phức tạp hơn và khó tùy biến sau này.
 
-## 6. Thiết kế View (Style)
-
-
-## 7. Kỹ thuật Debug cơ bản
+## 7. Thiết kế View (Style)
 
 
-## 8. Các Component thường sử dụng
-### 8.1. Text
-### 8.2. Button
-### 8.3. Image
-### 8.4. Flatlist
-### 8.5. ....
+## 8. Kỹ thuật Debug cơ bản
 
-## 9. Prop và cách truyền dữ liệu giữa các View
+Xây dựng ứng dụng React-Native khác với ứng dụng native là bạn không thể đặt break point rồi chạy và chờ chương trình nhảy vào vị trí mà bạn đợi và xem trạng thái hay biến lúc đó bằng bao nhiêu đang như thế nào. Thay vì vậy chương trình React-Native cho phép bạn in giá trị tại thời điểm đó và xuất ra màn hình console.<br> Sử dụng lệnh 
+```console.log(variable)``` để in giá trị của biến bất kì (xem ví dụ phía trên để biết việc in giá trị của biến message trong state)
+
+Xcode và Android studio mặc định khi run debug sẽ xuất các log này ra trong phần All Output (Xcode), Logcat (Android Studio).
+
+Bên cạnh đó bạn có thể sử dụng chức năng Debug JS Remotely (xem phần hiển thị menu điều khiển trong mục 4) để thấy các log này trong phần console của trình duyệt web.
+
+Ngoài ra bạn có thể sử dụng terminal (cmd) để xem log IOS hoặc Android bằng cách gõ lệnh:
+
+```
+react-native log-ios
+//or
+react-native log-android
+
+```
+
+## 9. Các Component thường sử dụng
+### 9.1. Text
+### 9.2. Button
+### 9.3. Image
+### 9.4. Flatlist
+### 9.5. ....
+
+## 10. Prop và cách truyền dữ liệu giữa các View (Screen)
 
 
-## 10. Cài đặt và sử dụng thư viện
-### 10.1. Cài đặt thư viện
-### 10.2. Sử dụng thư viện
+## 11. Cài đặt và sử dụng thư viện
+### 11.1. Cài đặt thư viện
+### 11.2. Sử dụng thư viện
 
-## 11. Giao tiếp Client vs Server
-### 11.1. RESTful API.
-### 11.2. Websocket
+## 12. Giao tiếp Client vs Server
+### 12.1. RESTful API.
+### 12.2. Websocket
 
-## 12. Lưu trữ dữ liệu
-### 12.1. Storage:
-### 12.2. Database:
+## 13. Lưu trữ dữ liệu
+### 13.1. Storage:
+### 13.2. Database:
 
-## 13. Đa Ngôn ngữ
+## 14. Đa Ngôn ngữ
 
-## 14. Giao tiếp với Native
+## 15. Giao tiếp với Native
 
+## 16. Quy chuẩn tên biến và cấu trúc chương trình
+Khi bạn tìm hiểu được kha khá các vấn đề về React-Native và code được một vài chương trình đơn giản thì cũng là lúc chúng ta nên xem lại các quy chuẩn thiết kế, cũng như quy chuẩn về tên biến để:
 
+- Khi đọc lại bớt bỡ ngỡ (trước mình code cái gì vậy)
+- Người khác đọc vào biết bạn đang làm gì?
+- Có thể bạn khác join vào dự án biết cách sửa đổi.
+- Làm dự án lớn nhiều người tham gia.
+- ....
 
-## 15. Quy chuẩn tên biến
+Tác giả dưa ra một số quy chuẩn cơ bản trên cái nhìn của tác giả
+### 16.1. Tên biến:
 
-## 16. Cấu trúc chương trình
+### 16.2. Cấu trúc chương trình:
 
 
 
