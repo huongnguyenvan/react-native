@@ -35,7 +35,7 @@ P/s: Bài viết chủ yếu dựa trên tài liệu chính thống của React-
 #### - Để chạy các code mẫu, sau khi tải về vui lòng vào thư mục và chạy dòng lệnh ```npm install``` để tải toàn bộ thư viện cần sử dụng. Và chạy ```react-native run-ios``` để chạy ứng dụng trên IOS. ```react-native run-android``` để chạy ứng dụng trên hệ điều hành Android.
 
 
-# II. HƯỚNG DẪN
+# III. NỘI DUNG HƯỚNG DẪN
 ## 1. Hướng dẫn cài đặt môi trường react-native trên hệ điều hành Windowns.
 
 - **Bước 1**: Cài đặt Chocolatey từ <https://chocolatey.org> (Chocolatey là trình quản lý các gói thư viện của Windowns)
@@ -509,8 +509,13 @@ Là một component cũng thường xuyên được sử dụng. Thường đư�
 flex: 1 ở style sẽ giúp kéo view rộng hết khung chứa có thể.
 
 ### 9.2. Text
-Dùng để hiển thị 1 message lên màn hình. Có thể sử dụng text cố định hoặc in nội dung của một biến lên màn hình 
-```<Text>{variable_here}<Text>```
+Dùng để hiển thị 1 message lên màn hình. Có thể sử dụng text cố định hoặc in nội dung của một biến lên màn hình
+
+```
+<Text>Message Here<Text>
+<Text>{variable_here}<Text>
+```
+
 ### 9.3. Image
 Dùng để hiển thị hình ảnh lên màn hình. Có 3 cách hiển thị:
 
@@ -898,12 +903,37 @@ Khi bạn tìm hiểu được kha khá các vấn đề về React-Native và c
 Tác giả dưa ra một số quy chuẩn cơ bản trên cái nhìn của tác giả
 ### 17.1. Tên biến:
 
+
 ### 17.2. Cấu trúc chương trình:
 
+Sau những dự án và tìm hiểu trên mạng. Mình có đưa ra mô hình cấu trúc thư mục dự án như sau
+
+![](images/project-structure.jpg)
 
 
+Toàn bộ source code của chương trình sẽ được đặt trong thư mục app:
 
-
+- **assets** là thư mục chứa resource của mình bao gồm các resource như custom font (fonts), hình ảnh (images), ngôn ngữ (languages)
+- **configs** là thư mục chứa các cấu hình của ứng dụng: bao gồm các cấu hình server, link, màu sắc cơ bản.
+- **libs** là thư mục chứa các thư viện cơ bản của mình để xử lý một số vấn đề nội bộ như:
+  - **Database** (xử lý lưu trữ dữ liệu bằng database)
+  - **Storage** (xử lý lưu trữ dữ liệu bằng storage)
+  - **Language** (Cấu hình xử lý đa ngôn ngữ trong ứng dụng)
+  - **RESTClient** (Cấu hình, danh sách các api truy cập hệ thống server)
+  - **SoundPlayer** (Điều khiển âm thanh)
+  - **Inapp** (Một vài cấu hình, xử lý thanh toán mua bán với store)
+  - **Ads** (Cấu hình hiển thị quảng cáo từ bên thứ 3)
+  - .....
+- **models** là thư mục chứa các model do mình định nghĩa, có thể là định nghĩa các đối tượng hoặc các loại của đối tượng
+- **modules** là thư mục chứa các module do mình định nghĩa hoặc tùy biến lại. Trong đó bao gồm:
+  - **screens** - module chứa toàn bộ xử lý màn hình của ứng dụng
+  - **views** - module chứa toàn bộ view đã được custom.
+  - Và một số module mình muốn chỉnh sửa từ thư viện, thì có thể thêm vào đây để tùy biến.
+  
+  
+  
+  ###Đến đây là kết thúc bài hướng dẫn của mình rồi. Hy vọng bài hướng dẫn sẽ giúp bạn có được những cái nhìn tổng quan về React-native để xây dựng một ứng dụng cho riêng mình.
+  ###P/S: Nếu có thời gian mình sẽ viết tiếp về cách xây dựng 1 ứng dụng đọc báo hoàn chỉnh trên android và ios. Cho Star để mình lấy động lực nhé.
 
 
 
