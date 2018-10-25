@@ -16,7 +16,17 @@ P/s: Bài viết chủ yếu dựa trên tài liệu chính thống của React-
 #### - Xây dựng 1 ứng dụng đọc báo như báo mới.
 
 # II. Một vài lưu ý
+#### - Bài viết nhắm tới các bạn đã có cơ bản về javascript nhất là quen với ES6. Nếu bạn chưa biết về javascript vui lòng tìm hiểu javascript cơ bản ít nhất bạn cần nắm vững những kiến thức sau (bạn có thể tự tìm hiểu tại <https://freetuts.net/hoc-javascript/javascript-can-ban>):
+ - Biến và toán tử trong javascript
+ - Lệnh If...else
+ - Lệnh Switch..case
+ - Vòng lặp white
+ - Vòng lặp for
+ - Vòng lặp for...in
+ - Viết hàm thực thi các tác vụ cơ bản
+ - Mảng: (duyệt mảng lấy các phần tử)
 
+#### - Nếu biết về css thì đó cũng là một điểm lợi thế. Bạn có thể tìm hiểu thêm tại đây <https://freetuts.net/css-la-gi-hoc-css-nhu-the-nao-327.html>
 #### - Hiện tại hệ điều hành Windowns chỉ build được ứng dụng Android.
 #### - Hệ điều hành IOS có thể build được cả Android và IOS.
 #### - Phiên bản IOS thấp nhất mà react-native có thể hỗ trợ là IOS 8.0
@@ -316,7 +326,7 @@ react-native log-android
 ```
 
 ## 9. Các Component thường sử dụng
-Dưới đây là code demo những component cơ bản thường sử dụng. Bạn có thể code lại, copy hoặc chạy demo từ example.
+Dưới đây là code demo những component cơ bản thường sử dụng. Bạn có thể code lại, copy hoặc chạy demo từ example (demo có sử dụng hình ảnh nên bạn phải copy hình ảnh trong example - Example/app/assets/images).
 
 ```javascript
 import React from 'react';
@@ -711,7 +721,7 @@ const Styles = StyleSheet.create({
 
 và 1 file ViewItem.js nằm cùng thư mục
 
-```
+```javascript
 import React from 'react';
 import { Image, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Colors } from '../../../configs/style';
@@ -775,7 +785,7 @@ const Styles = StyleSheet.create({
 
 ```
 
-Trong Example mình đã gộp style lại và đưa nó ra 1 file riêng là styles.js để dễ quản lý, demo trên có sử dụng hình ảnh nên bạn phải copy hình ảnh trong example (Example/app/assets/images).
+Trong Example mình đã gộp style lại và đưa nó ra 1 file riêng là styles.js để dễ quản lý (demo trên có sử dụng hình ảnh nên bạn phải copy hình ảnh trong example - Example/app/assets/images).
 
 Ở ví dụ trên ta demo việc truyền dữ liệu giữa 2 component thông qua props
 
@@ -832,30 +842,51 @@ onPressItem() {
 Một vài lưu ý khi sử dụng props
 
 - Không thay đổi dữ liệu trong prop ở bên nhận.
-- Nên chia mỗi thành phần riêng biệt ra mỗi component riêng và giao tiếp với component chính thông qua props để giảm thiểu việc phải vẽ lại nguyên toàn bộ, nhất là những component có chứa các timmer (ví dụ gọi hàm setInterval() để tạo timmer).
+- Nên chia mỗi thành phần riêng biệt ra mỗi component riêng và giao tiếp với component chính thông qua props để giảm thiểu việc phải vẽ lại nguyên toàn bộ, nhất là những component có chứa các timmer (setInterval(), setTimeOut()...).
 - ...
-
 
 
 ## 11. Cài đặt và sử dụng thư viện
 ### 11.1. Cài đặt thư viện
-### 11.2. Sử dụng thư viện
+Thông thường trong React-Native sử dụng thư viện rất nhiều có lẽ vì một vài lý do: 
+
+- Code từ đầu thì lâu hơn.
+- Thư viện được nhiều người xây dựng nên khả năng tốt hơn so với việc mình code một mình.
+- Có cộng đồng hỗ trợ nên có lỗi thì cũng dễ dàng sửa lỗi.
+- Những thư viện liên quan đến SDK của các nhà phát triển như Facebook, Google, Firebase... đều được cộng đồng phát triển để hỗ trợ việc bạn xây dựng ứng dụng tốt nhất.
+- Và nhiều lý do khác nữa.
+
+Khi bạn gặp vấn đề hoặc cần làm một cái gì đó với react-native hãy tìm Google với từ khóa react-native + cái gì bạn muốn làm.
+Ví dụ muốn làm chức năng đăng nhập với facebook thì có thể tìm: react-native login with facebook. Đa phần bạn sẽ thấy thư viện hỗ trợ nằm ngay trang đầu tiên. Hãy vào trang chính thống của thư viện để xem cách cài đặt và sử dụng thư viện. Nhớ xem lại số star và các vấn đề trước khi bạn muốn sử một thư viện nào đó trên github.
+Nếu thư viện được publish trên npmjs <https://www.npmjs.com/> thì bạn có thể cài đặt thông qua
+
+```npm install package_name``` 
+
+### 11.2. Link thư viện
+Một phần khá quan trọng, sau khi bạn kéo thư viện từ npm về, thì bạn cần link thư viện đó vào app của bạn để ứng dụng có thể khởi chạy các phần code native của thư viện hoặc được quyền chạy một số tác vụ khác.
+Thông thường các thư viện đều có link tự động qua lệnh ```react-native link```. Tùy vào từng thư viện sẽ có hướng dẫn và cách link bổ sung. Bên cạnh đó một số thư viện không link tự động được hoặc project của bạn có vấn đề phải link bằng tay lúc đó bạn nên tham khảo bài viết này trước để biết cách link và hiểu sâu hơn <https://facebook.github.io/react-native/docs/linking-libraries-ios>
+
+### 11.3. Chỉnh sửa thư viện
+
+Đa phần trình quản lý source code (git/svn) sẽ không commit các thư viện có sẵn được cài đặt từ npm (thư mục *node_modules*) hoặc nếu mình cố gắng commit sẽ làm dự án của chúng ta nặng lên rất nhiều lần. Do vậy chúng ta không sửa trực tiếp thư viện trong *node_modules*. Sau khi cài đặt và link thư viện. Bạn hãy copy nguyên source code của thư viện qua app/modules và tiến hành sửa đổi, tùy biến thư viện tại đây. Lúc sử dụng nhớ chuyển đổi đường dẫn import thư viện qua dự án của bạn. Nếu đó là phần chỉnh sửa quan trong hy vọng bạn sẽ đóng góp cho cộng đồng bằng cách report lên dự án chính hoặc chia sẻ lại cho mọi người.
 
 ## 12. Chuyển đổi giữa các màn hình
 
-## 12. Giao tiếp Client vs Server
-### 12.1. RESTful API.
-### 12.2. Websocket
 
-## 13. Lưu trữ dữ liệu
-### 13.1. Storage:
-### 13.2. Database:
 
-## 14. Đa Ngôn ngữ
+## 13. Giao tiếp Client vs Server
+### 13.1. RESTful API.
+### 13.2. Websocket
 
-## 15. Giao tiếp với Native
+## 14. Lưu trữ dữ liệu
+### 14.1. Storage:
+### 14.2. Database:
 
-## 16. Quy chuẩn tên biến và cấu trúc chương trình
+## 15. Đa Ngôn ngữ
+
+## 16. Giao tiếp với Native
+
+## 17. Quy chuẩn tên biến và cấu trúc chương trình
 Khi bạn tìm hiểu được kha khá các vấn đề về React-Native và code được một vài chương trình đơn giản thì cũng là lúc chúng ta nên xem lại các quy chuẩn thiết kế, cũng như quy chuẩn về tên biến để:
 
 - Khi đọc lại bớt bỡ ngỡ (trước mình code cái gì vậy)
@@ -865,9 +896,9 @@ Khi bạn tìm hiểu được kha khá các vấn đề về React-Native và c
 - ....
 
 Tác giả dưa ra một số quy chuẩn cơ bản trên cái nhìn của tác giả
-### 16.1. Tên biến:
+### 17.1. Tên biến:
 
-### 16.2. Cấu trúc chương trình:
+### 17.2. Cấu trúc chương trình:
 
 
 
