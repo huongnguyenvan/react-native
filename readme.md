@@ -76,23 +76,23 @@ IOS: ```	react-native run-ios``` <br>Android: ```react-native run-android```
 Khi chạy lệnh này hệ điều hành sẽ tạo một server local để build code react của bạn. Kèm theo đó là chạy các lệnh để build ứng dụng.<br>Bạn cũng có thể mở file /ios/ProjectName.xcodeproj bằng Xcode để khởi chạy ứng dụng, hoặc mở nguyên thư mục android bằng Android studio để khởi chạy ứng dụng.
 
 - **Hiển thị Menu điều khiển**:
- - Command + D (hoặc lắc điện thoại IOS) để hiển thị menu điều khiển khi run debug ứng dụng trên MacOS.
- - ctrl + D hoặc phím menu để hiển thị menu điều khiển khi run debug ứng dụng trên Windown.
- - Command + R để reload lại source code máy ảo IOS
- - R + R để reload lại source code máy ảo Android.
+  - Command + D (hoặc lắc điện thoại IOS) để hiển thị menu điều khiển khi run debug ứng dụng trên MacOS.
+  - ctrl + D hoặc phím menu để hiển thị menu điều khiển khi run debug ứng dụng trên Windown.
+  - Command + R để reload lại source code máy ảo IOS
+  - R + R để reload lại source code máy ảo Android.
 
 - **Một vài lệnh vui vui để sửa lỗi**  (Bật terminal or cmd trong dự án vừa khởi tạo)
 
- - Không khởi tạo server để build khi run debug trên android thì chạy
+  - Không khởi tạo server để build khi run debug trên android thì chạy
  ```react-native start```
  
- - Khi run Android mà không sử dụng code react-native mới nhất thì chạy dòng này (Build toàn bộ source của bạn thành 1 file và đặt nó vào trong assets, tạo các resource android tương ứng mà bạn sử dụng).
+  - Khi run Android mà không sử dụng code react-native mới nhất thì chạy dòng này (Build toàn bộ source của bạn thành 1 file và đặt nó vào trong assets, tạo các resource android tương ứng mà bạn sử dụng).
 ```
 react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
 ```
- - Khi general APK mà bị lỗi double resource thì xóa thư mục drawable trong android/app/src/main/res thì sẽ build được.
+  - Khi general APK mà bị lỗi double resource thì xóa thư mục drawable trong android/app/src/main/res thì sẽ build được.
  
- - Khi run app ios bị lỗi "Build input file cannot be found: '../Example/node_modules/react-native/third-party/double-conversion-1.1.6/src/strtod.cc'" thì chạy 2 dòng lệnh sau:
+  - Khi run app ios bị lỗi "Build input file cannot be found: '../Example/node_modules/react-native/third-party/double-conversion-1.1.6/src/strtod.cc'" thì chạy 2 dòng lệnh sau:
  
  ```
 cd node_modules/react-native/scripts && ./ios-install-third-party.sh && cd ../../../
@@ -320,8 +320,7 @@ Dưới đây là code demo những component cơ bản thường sử dụng. B
 
 ```javascript
 import React from 'react';
-import { Image, View, Text, Button, TouchableOpacity, FlatList } from 'react-native';
-import Styles from './styles';
+import { Image, View, Text, Button, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import { Colors } from '../../../configs/style';
 
 export class Components extends React.Component {
@@ -438,10 +437,54 @@ export class Components extends React.Component {
         )
     }
 }
+//Trong example mình tách phần Styles này qua file khác cho dễ đọc
+const Styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        backgroundColor: Colors.white,
+    },
+    containImage: {
+        marginTop: 16,
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    textMessage: {
+        marginTop: 16,
+        color: 'green',
+        fontSize: 16,
+    },
+    imgLogo: {
+        width: 50,
+        height: 50,
+        margin: 4
+    },
+    btnStyle: {
+        height: 50,
+        width: 200,
+        borderColor: Colors.primary,
+        borderRadius: 5,
+        borderWidth: 2,
+        justifyContent: "center",
+        alignItems: 'center',
+        margin: 8
+    },
+    textAction: {
+        color: Colors.primary,
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    containerItem: {
+        marginTop: 16,
+        flexDirection: 'row',
+        alignItems: 'center'
+    }
+});
 
 ```
 
-Sau khi chạy Demo click vào Component ta được UI như sau
+Sau khi chạy Demo ta được UI như sau (run example thì click vào component)
 
 ![](images/demo_component.jpg)
 
@@ -569,10 +612,236 @@ Mỗi component sẽ có nhiều thuộc tính khác để hỗ trợ bạn làm
 
 ## 10. Prop và cách truyền dữ liệu giữa các View (Screen)
 
+Tạo file App.js như sau
+
+```javascript
+
+import React from 'react';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { Colors } from '../../../configs/style';
+import { ViewItem } from './ViewItem'
+
+export class App extends React.Component {
+    //Header ứng dụng (tùy chọn)
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: "PROPS",
+            headerStyle: {
+                backgroundColor: Colors.primary
+            },
+            headerTintColor: Colors.white,
+            headerTitleStyle: {
+                alignSelf: 'center'
+            }
+        };
+    };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            message: "",
+            listData: [
+                {
+                    image: require('../../../assets/images/ios.png'),
+                    title: "IOS"
+                },
+                {
+                    image: require('../../../assets/images/android.png'),
+                    title: "Android"
+                },
+                {
+                    image: require('../../../assets/images/react-native.png'),
+                    title: "React Native"
+                }
+            ]
+        }
+    }
+
+    // onPressItem
+    onPressItem(item, index) {
+        this.setState({
+            message: "Click item: " + index + " - title: " + item.title
+        })
+    }
+
+    render() {
+        return (
+            <View style={Styles.container}>
+                <Text style={Styles.textMessage}>{this.state.message}</Text>
+                <FlatList
+                    style={Styles.containList}
+                    data={this.state.listData}
+                    renderItem={({ item, index }) => this.renderItem(item, index)}
+                    keyExtractor={(item, index) => index.toString()}
+                />
+            </View>
+        );
+    }
+
+    /* Hiển thị chi tiết 1 item như thế nào */
+    renderItem(item, index) {
+        return (
+            <ViewItem
+                data={item} //Truyền item này qua ViewItem như một prop
+                onPressItem={(itemPress) => { this.onPressItem(itemPress, index) }}    // truyền một hàm qua để bắt sự kiện click item
+            />
+        )
+    }
+}
+
+const Styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        backgroundColor: Colors.white,
+    },
+    textMessage: {
+        marginTop: 16,
+        color: 'green',
+        fontSize: 16,
+    },
+    containList:{
+        width: '100%',
+    }
+});
+
+
+```
+
+và 1 file ViewItem.js nằm cùng thư mục
+
+```
+import React from 'react';
+import { Image, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Colors } from '../../../configs/style';
+
+export class ViewItem extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            color: Colors.white
+        }
+    }
+
+
+    onPressItem() {
+        //Bạn có thể xử lý sự kiện ở đây nếu cần, ví dụ như như đổi màu item
+        let newColor = Colors.white;
+        if (this.state.color == Colors.white) {
+            newColor = Colors.primary
+        }
+        this.setState({
+            color: newColor
+        })
+
+        //Hoặc chuyển việc xử lý đó ra phía ngoài thông qua hàm được truyền vào.
+        //Có thể truyền dữ liệu ra ngoài để hàm phía ngoài xử lý
+        this.props.onPressItem(this.props.data)
+    }
+
+    render() {
+        //in props được truyền qua để kiểm tra
+        console.log(this.props.data)
+        //render ra màn hình item được truyền vào thông qua props
+        return (
+            <TouchableOpacity style={[Styles.containerItem, { backgroundColor: this.state.color }]} onPress={() => this.onPressItem()}>
+                <Image
+                    style={Styles.imgLogo}
+                    resizeMode={'contain'}
+                    source={this.props.data.image}  //sử dụng prop được truyền qua
+                />
+                <Text>{this.props.data.title}</Text>
+            </TouchableOpacity>
+        )
+    }
+}
+
+const Styles = StyleSheet.create({
+    imgLogo: {
+        width: 50,
+        height: 50,
+        margin: 4
+    },
+    containerItem: {
+        marginLeft: 16,
+        marginRight: 16,
+        marginTop: 16,
+        flexDirection: 'row',
+        alignItems: 'center'
+    }
+});
+
+```
+
+Trong Example mình đã gộp style lại và đưa nó ra 1 file riêng là styles.js để dễ quản lý, demo trên có sử dụng hình ảnh nên bạn phải copy hình ảnh trong example (Example/app/assets/images).
+
+Ở ví dụ trên ta demo việc truyền dữ liệu giữa 2 component thông qua props
+
+Bên gửi qua (ViewItem đóng vai trò là 1 component được tùy biến)
+
+```javascript
+<ViewItem
+	data={item} //Truyền item này qua ViewItem như một prop
+	onPressItem={(itemPress) => { this.onPressItem(itemPress, index) }}    // truyền một hàm qua để bắt sự kiện click item
+/>
+```
+
+Bên nhận dữ liệu có thể sử dụng dữ liệu được truyền qua thông qua props. (Kiểu nó ném mấy cái dữ liệu qua thì bên nhận này truy xuất thông qua props) 
+
+```javascript
+...
+render() {
+    //in props được truyền qua để kiểm tra
+    console.log(this.props.data)
+    //render ra màn hình item được truyền vào thông qua props
+    return (
+        <TouchableOpacity style={[Styles.containerItem, { backgroundColor: this.state.color }]} onPress={() => this.onPressItem()}>
+            <Image
+                style={Styles.imgLogo}
+                resizeMode={'contain'}
+                source={this.props.data.image}  //sử dụng prop được truyền qua
+            />
+            <Text>{this.props.data.title}</Text>
+        </TouchableOpacity>
+    )
+}
+```
+
+Việc truyền dữ liệu ngược lại cũng được thể hiện trong ví dụ thông qua việc xử lý sự kiện onPressItem()
+
+```javascript
+onPressItem() {
+    //Bạn có thể xử lý sự kiện ở đây nếu cần, ví dụ như như đổi màu item
+    let newColor = Colors.white;
+    if (this.state.color == Colors.white) {
+        newColor = Colors.primary
+    }
+    this.setState({
+        color: newColor
+    })
+
+    //Hoặc chuyển việc xử lý đó ra phía ngoài thông qua hàm được truyền vào.
+    //Có thể truyền dữ liệu ra ngoài để hàm phía ngoài xử lý
+    this.props.onPressItem(this.props.data)
+}
+
+```
+
+Một vài lưu ý khi sử dụng props
+
+- Không thay đổi dữ liệu trong prop ở bên nhận.
+- Nên chia mỗi thành phần riêng biệt ra mỗi component riêng và giao tiếp với component chính thông qua props để giảm thiểu việc phải vẽ lại nguyên toàn bộ, nhất là những component có chứa các timmer (ví dụ gọi hàm setInterval() để tạo timmer).
+- ...
+
+
 
 ## 11. Cài đặt và sử dụng thư viện
 ### 11.1. Cài đặt thư viện
 ### 11.2. Sử dụng thư viện
+
+## 12. Chuyển đổi giữa các màn hình
 
 ## 12. Giao tiếp Client vs Server
 ### 12.1. RESTful API.
