@@ -12,6 +12,9 @@ const AppNavigator = StackNavigator({
     },
     COMPONENT: {
         screen: Screens.Components
+    },
+    PROPS: {
+        screen: Screens.Props
     }
 }, {
         headerMode: "screen"

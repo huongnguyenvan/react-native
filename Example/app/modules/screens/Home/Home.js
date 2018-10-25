@@ -8,6 +8,7 @@ import {
 import Styles from './styles';
 // import AppConfig from '../../../configs/config';
 import { Colors } from '../../../configs/style';
+import SCREENS from '../../../configs/screen';
 
 export class Home extends React.Component {
     static navigationOptions = ({ navigation }) => {
@@ -37,6 +38,12 @@ export class Home extends React.Component {
         this.props.navigation.navigate("COMPONENT")
     }
 
+    onPressProps() {
+        //Để đễ quản lý các màn hình ta đặt các tên màn hình vào một đối tượng và đưa nó ra config
+
+        this.props.navigation.navigate(SCREENS.PROPS)
+    }
+
     render() {
         return (
             <View style={Styles.container}>
@@ -46,6 +53,10 @@ export class Home extends React.Component {
 
                 <TouchableOpacity style={Styles.btnStyle} onPress={() => this.onPressComponent()}>
                     <Text style={Styles.textAction}>COMPONENT</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={Styles.btnStyle} onPress={() => this.onPressProps()}>
+                    <Text style={Styles.textAction}>PROPS</Text>
                 </TouchableOpacity>
 
             </View>
