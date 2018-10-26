@@ -947,10 +947,10 @@ Trong đó Screens.Home là class được import từ module screens.<br>Lưu �
 
 Dòng lệnh này thực hiện import toàn bộ những class được xuất ra thông qua file index.js. Vì vậy nếu bạn thêm màn hình mới lưu ý vào file index.js để xuất thêm class bạn vừa tạo.
 
-   - Chuyển đổi màn hình:
+  - Chuyển đổi màn hình:
    
-   	Có 2 cách chuyển màn hình:
-	 -  Chuyển đổi và xóa toàn bộ màn hình trước đó:
+ Có 2 cách chuyển màn hình:
+   - Chuyển đổi và xóa toàn bộ màn hình trước đó:
 	 
 	 	```
 	 	// chuyển qua màn hình PROPS đã khai báo trong App StackNavigator
@@ -1082,8 +1082,8 @@ Toàn bộ source code của chương trình sẽ được đặt trong thư m�
   
   
   
-  ###Đến đây là kết thúc bài hướng dẫn của mình rồi. Hy vọng bài hướng dẫn sẽ giúp bạn có được những cái nhìn tổng quan về React-Native để xây dựng một ứng dụng cho riêng mình.
-  ###P/S: Nếu có thời gian mình sẽ viết tiếp về cách xây dựng 1 ứng dụng đọc báo hoàn chỉnh trên Android và iOS. Cho Star để mình lấy động lực nhé.
+  ### Đến đây là kết thúc bài hướng dẫn của mình rồi. Hy vọng bài hướng dẫn sẽ giúp bạn có được những cái nhìn tổng quan về React-Native để xây dựng một ứng dụng cho riêng mình.
+  ### P/S: Nếu có thời gian mình sẽ viết tiếp về cách xây dựng 1 ứng dụng đọc báo hoàn chỉnh trên Android và iOS. Cho Star để mình lấy động lực nhé.
 
 
 
