@@ -5,4 +5,5 @@ export const Colors = {
 	black:'#000000',
 	white:'#ffffff',
 	gray:'gray',
+	sazerac: '#FFF6E5',
 };

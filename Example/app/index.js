@@ -15,6 +15,9 @@ const AppNavigator = StackNavigator({
     },
     PROPS: {
         screen: Screens.Props
+    },
+    RESTFUL: {
+        screen: Screens.RestFul
     }
 }, {
         headerMode: "screen"

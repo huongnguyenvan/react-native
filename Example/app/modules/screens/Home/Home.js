@@ -40,8 +40,11 @@ export class Home extends React.Component {
 
     onPressProps() {
         //Để đễ quản lý các màn hình ta đặt các tên màn hình vào một đối tượng và đưa nó ra config
-
         this.props.navigation.navigate(SCREENS.PROPS)
+    }
+
+    onPressRestFul() {
+        this.props.navigation.navigate(SCREENS.RESTFUL)
     }
 
     render() {
@@ -57,6 +60,10 @@ export class Home extends React.Component {
 
                 <TouchableOpacity style={Styles.btnStyle} onPress={() => this.onPressProps()}>
                     <Text style={Styles.textAction}>PROPS</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={Styles.btnStyle} onPress={() => this.onPressRestFul()}>
+                    <Text style={Styles.textAction}>RESTful API</Text>
                 </TouchableOpacity>
 
             </View>

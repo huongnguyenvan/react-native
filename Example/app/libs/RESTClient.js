@@ -8,17 +8,15 @@ let networkError = {
 
 export class RESTFulAPI {
 
-    getConfig() {
-        let api = getBaseURL() + "get_config";
+    //Định nghĩa một api lấy language từ server.
+    // Public api có sẵn tại https://api.ice5.skyx.app/get_languages
+    
+    getLanguage() {
+        let api = getBaseURL() + "get_languages";
         return this.fetchData(api);
     }
 
-    /**
-   * Api: the url of api
-   * method: GET or POST
-   * Body: option, the body of post method
-   *
-   */
+    //Định nghĩa một hàm bất đồng bộ hỗ trợ các phương thức, GET, POST, PUT, DELETE (mặc định là GET)
     async fetchData(api, method = 'GET', body) {
         let headers = {
             Accept: 'application/json',

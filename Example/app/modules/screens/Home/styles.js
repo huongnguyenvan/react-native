@@ -10,7 +10,7 @@ const Styles = StyleSheet.create({
     },
     btnStyle: {
         height: 50,
-        width: 200,
+        width: 250,
         borderColor: Colors.primary,
         borderRadius: 5,
         borderWidth: 2,
