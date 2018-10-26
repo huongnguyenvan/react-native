@@ -967,7 +967,8 @@ Dòng lệnh này thực hiện import toàn bộ những class được xuất 
 	//or
 	this.props.navigation.navigate("PROPS", {});
 	```
- {} - Đây cũng là cách để bạn truyền một đối tượng qua cho màn hình kế tiếp.<br>Mặc định nếu bạn hiển thị Status bar thì sẽ có phím quay về, nhưng nếu cần thiết có thể quay về bằng cách gọi hàm sau đây:
+	
+	{} - Đây cũng là cách để bạn truyền một đối tượng qua cho màn hình kế tiếp.<br>Mặc định nếu bạn hiển thị Status bar thì sẽ có phím quay về, nhưng nếu cần thiết có thể quay về bằng cách gọi hàm sau đây:
 	 	
 	```this.props.navigation.goBack();```
    	 
