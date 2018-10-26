@@ -34,6 +34,8 @@ P/s: Bài viết chủ yếu dựa trên tài liệu chính thống của React-
 #### - Các hướng dẫn dưới đây ngoại trừ phần cài đặt, đều là hướng dẫn để xây dựng ứng dụng trên IOS. Một số chức năng có thể IOS hỗ trợ nhưng Android không hỗ trợ và ngược lại, nên nếu có lỗi các bạn có thể bình luận tại đây hoặc tìm kiếm google để nâng cao khả năng giải quyết vấn đề nhé.
 #### - Để chạy các code mẫu, sau khi tải về vui lòng vào thư mục và chạy dòng lệnh ```npm install``` để tải toàn bộ thư viện cần sử dụng. Và chạy ```react-native run-ios``` để chạy ứng dụng trên IOS. ```react-native run-android``` để chạy ứng dụng trên hệ điều hành Android.
 
+**Khuyến nghị**: Sau những lần tìm hiểu và phát triển ứng dụng thì mình khuyến cáo không nên sử dụng Expo (framework của react) để phát triển ứng dụng đơn giản. Bởi vì dự án của bạn sẽ nặng lên, bạn rất khó quản lý permission và các thư viện đi kèm.
+
 
 # III. NỘI DUNG HƯỚNG DẪN
 ## 1. Hướng dẫn cài đặt môi trường react-native trên hệ điều hành Windowns.
@@ -100,18 +102,15 @@ Khi chạy lệnh này hệ điều hành sẽ tạo một server local để bu
 ```
 react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
 ```
-  - Khi general APK mà bị lỗi double resource thì xóa thư mục drawable trong android/app/src/main/res thì sẽ build được.
+   - Khi general APK mà bị lỗi double resource thì xóa thư mục drawable trong android/app/src/main/res thì sẽ build được.
  
-  - Khi run app ios bị lỗi "Build input file cannot be found: '../Example/node_modules/react-native/third-party/double-conversion-1.1.6/src/strtod.cc'" thì chạy 2 dòng lệnh sau:
+   - Khi run app ios bị lỗi "Build input file cannot be found: '../Example/node_modules/react-native/third-party/double-conversion-1.1.6/src/strtod.cc'" thì chạy 2 dòng lệnh sau:
  
  ```
 cd node_modules/react-native/scripts && ./ios-install-third-party.sh && cd ../../../
 cd node_modules/react-native/third-party/glog-0.3.5/ && ../../scripts/ios-configure-glog.sh && cd ../../../../
 ```
-Chú ý version phiên bản glog-0.3.5 mà bạn đang sử dụng.
-
-
-- **Khuyến cáo**: Sau những lần tìm hiểu và phát triển ứng dụng thì tác giả khuyến cáo không nên sử dụng Expo (framework của react) để phát triển ứng dụng đơn giản. Bởi vì dự án của bạn sẽ nặng lên, bạn sẽ khó quản lý permission và các thư viện đi kèm.
+Chú ý version phiên bản glog (0.3.5) mà bạn đang sử dụng.
 
 ## 5. Các thành phần cơ bản của dự án
 Cấu trúc thư mục mà bạn nhìn thấy có thể sẽ như dưới đây (tùy version react-native hiện tại của bạn). Hình dưới đây không bao gồm một vài file bị ẩn thuộc cấu hình của react-native<br>
@@ -877,6 +876,124 @@ Thông thường các thư viện đều có link tự động qua lệnh ```rea
 
 ## 12. Chuyển đổi giữa các màn hình
 
+Một ứng dụng bạn phát triển không thể chỉ có một màn hình. Vì vậy bạn phải biết cách chuyển đổi qua lại giữa các màn hình. Hiện tại mình sử dụng thư viện react-navigation (v.2.18.1) để chuyển đổi giữa các màn hình. Các bạn có thể tìm hiểu thêm về thư viện này tại (<https://reactnavigation.org>)
+
+- Cài đặt thư viện:
+Vào dự án bạn tạo và chạy dòng lệnh sau để cài đặt thư viện
+```npm install --save react-navigation```
+
+- Sử dụng thư viện:
+
+  - Xây dựng cấu trúc ứng dụng:
+	
+	Để bạn hiểu rõ hơn về phần demo sau bạn vui lòng xem lại file index.js trong Example (Example/app/index.js). Dưới đây là phần tạo cấu trúc sườn của ứng dụng dựa vào StackNavigator của thư viện react-navigation.
+	
+	
+```javascript
+import React, { Component } from 'react';
+import { StackNavigator } from 'react-navigation';
+import { StyleSheet, View } from 'react-native';
+
+// import toàn bộ các class Screen từ modules/screens (những class được xuất thông qua file modules/screens/index.js)
+import * as Screens from './modules/screens';
+
+
+//Tạo StackNavigator từ thư viện react-navigation
+const AppNavigator = StackNavigator({
+    HOME: {
+        screen: Screens.Home
+    },
+    STYLES: {
+        screen: Screens.StyleDemo
+    },
+    COMPONENT: {
+        screen: Screens.Components
+    },
+    PROPS: {
+        screen: Screens.Props
+    }
+}, {
+        headerMode: "screen"
+    });
+
+export default class App extends Component {
+    render() {
+        return (
+            <View style={styles.container}>
+					{/*Vẽ stack ứng dụng ra màn hình*/}
+                <AppNavigator />
+            </View>
+        );
+    }
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    }
+});
+
+```
+Như bạn thấy ở trên ta khai báo 1 ứng dụng có 4 màn hình HOME, STYLES, COMPONENT, PROPS. Mặc định màn hình nào ở trên cùng sẽ được xuất hiện đầu tiên. <br>Nội dung mỗi màn hình có dạng:
+
+```
+HOME: {
+	screen: Screens.Home
+}
+```
+Trong đó Screens.Home là class được import từ module screens.<br>Lưu ý dòng lệnh: 
+
+```import * as Screens from './modules/screens'; ```   
+
+Dòng lệnh này thực hiện import toàn bộ những class được xuất ra thông qua file index.js. Vì vậy nếu bạn thêm màn hình mới lưu ý vào file index.js để xuất thêm class bạn vừa tạo.
+
+   - Chuyển đổi màn hình:
+   
+   	Có 2 cách chuyển màn hình:
+	 -  Chuyển đổi và xóa toàn bộ màn hình trước đó:
+	 
+	 	```
+	 	// chuyển qua màn hình PROPS đã khai báo trong App StackNavigator
+	 	let pageContinue = NavigationActions.reset({
+      		index: 0,
+      		actions: [NavigationActions.navigate({ routeName: "PROPS", params: {} })]
+      	});
+		this.props.navigation.dispatch(pageContinue);
+		
+	 	```
+	 	
+ params: {} - Đây là phần để bạn truyền dữ liệu qua màn hình kế tiếp. Bạn có thể truyền qua cho màn hình tiếp theo một đối tượng theo cú pháp này.
+	 	
+	 -  Chuyển đổi và giữ lại màn hình trước để quay lại
+
+	 	```
+		// chuyển qua màn hình PROPS đã khai báo trong App StackNavigator
+	 	this.props.navigation.navigate("PROPS"); 
+	 	//or
+	 	this.props.navigation.navigate("PROPS", {});
+	 	
+	 	```
+	 	
+ {} - Đây cũng là cách để bạn truyền một đối tượng qua cho màn hình kế tiếp.<br>Mặc định nếu bạn hiển thị Status bar thì sẽ có phím quay về, nhưng nếu cần thiết có thể quay về bằng cách gọi hàm sau đây:
+	 	
+	 	```this.props.navigation.goBack();```
+	 	
+	- Hiển thị Status bar:
+
+		```
+		static navigationOptions = ({ navigation }) => {
+        	return {
+            	title: "PROPS",
+            	headerStyle: {
+                	backgroundColor: Colors.primary
+            	},
+            	headerTintColor: Colors.white,
+            	headerTitleStyle: {
+                	alignSelf: 'center'
+            	}
+        	};
+    	};
+		```
 
 
 ## 13. Giao tiếp Client vs Server
@@ -889,6 +1006,8 @@ Thông thường các thư viện đều có link tự động qua lệnh ```rea
 
 ## 15. Đa Ngôn ngữ
 
+
+
 ## 16. Giao tiếp với Native
 
 ## 17. Quy chuẩn tên biến và cấu trúc chương trình
@@ -900,8 +1019,39 @@ Khi bạn tìm hiểu được kha khá các vấn đề về React-Native và c
 - Làm dự án lớn nhiều người tham gia.
 - ....
 
-Tác giả dưa ra một số quy chuẩn cơ bản trên cái nhìn của tác giả
-### 17.1. Tên biến:
+Mình xin dưa ra một số quy chuẩn cơ bản như sau:
+### 17.1. Tên biến và hàm:
+
+- **Một vài quy chuẩn tên biến mà mình cần tuân thủ như**:
+
+  - Tên biến phải bắt đầu bằng ký tự viết thường.
+  - Tên biến không được bắt đầu bằng số hoặc ký tự đặc biệt.
+  - Những chữ cái đầu của mỗi từ đều viết hoa.
+  - Tên biến phải mang ý nghĩa rõ ràng.
+  - Nếu là style thì nên thêm viết tắt của view ở phía trước
+
+- **Một vài ví dụ về tên biến**:
+
+  - maxNumber
+  - minNumber
+  - textMessageAnswer
+  - btnActionAgree
+  - ....
+
+
+- **Một vài quy chuẩn tên hàm**:
+
+  - Tên hàm cũng bắt đầu bằng ký tự viết thường.
+  - Tên hàm không chứa các ký tự đặc biệt.
+  - Những chữ cái đầu của mỗi từ đều viết hoa.
+  - Tên hàm phải mang ý nghĩa rõ ràng và thể hiện được chức năng của hàm.
+
+- **Một vài ví dụ về tên hàm**:
+
+  - findMinOfTowNumber(firstNumber, secondNumeber){}
+  - onPressBtnLanguage(){}
+  - onPressNegativeAction(){}
+  - ....
 
 
 ### 17.2. Cấu trúc chương trình:
@@ -932,8 +1082,8 @@ Toàn bộ source code của chương trình sẽ được đặt trong thư m�
   
   
   
-  ###Đến đây là kết thúc bài hướng dẫn của mình rồi. Hy vọng bài hướng dẫn sẽ giúp bạn có được những cái nhìn tổng quan về React-native để xây dựng một ứng dụng cho riêng mình.
-  ###P/S: Nếu có thời gian mình sẽ viết tiếp về cách xây dựng 1 ứng dụng đọc báo hoàn chỉnh trên android và ios. Cho Star để mình lấy động lực nhé.
+  ###Đến đây là kết thúc bài hướng dẫn của mình rồi. Hy vọng bài hướng dẫn sẽ giúp bạn có được những cái nhìn tổng quan về React-Native để xây dựng một ứng dụng cho riêng mình.
+  ###P/S: Nếu có thời gian mình sẽ viết tiếp về cách xây dựng 1 ứng dụng đọc báo hoàn chỉnh trên Android và iOS. Cho Star để mình lấy động lực nhé.
 
 
 
