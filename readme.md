@@ -883,103 +883,97 @@ Vào dự án bạn tạo và chạy dòng lệnh sau để cài đặt thư vi�
 ```npm install --save react-navigation```
 
 - Sử dụng thư viện:
-
-  - Xây dựng cấu trúc ứng dụng:
+ 
+ - Xây dựng cấu trúc ứng dụng:	
+ Để bạn hiểu rõ hơn về phần demo sau bạn vui lòng xem lại file index.js trong Example (Example/app/index.js). Dưới đây là phần tạo cấu trúc sườn của ứng dụng dựa vào StackNavigator của thư viện react-navigation.
 	
-	Để bạn hiểu rõ hơn về phần demo sau bạn vui lòng xem lại file index.js trong Example (Example/app/index.js). Dưới đây là phần tạo cấu trúc sườn của ứng dụng dựa vào StackNavigator của thư viện react-navigation.
+	
+ ```javascript
+	import React, { Component } from 'react';
+	import { StackNavigator } from 'react-navigation';
+	import { StyleSheet, View } from 'react-native';
+	
+	// import toàn bộ các class Screen từ modules/screens (những class được xuất thông qua file modules/screens/index.js)
+	import * as Screens from './modules/screens';
 	
 	
-```javascript
-import React, { Component } from 'react';
-import { StackNavigator } from 'react-navigation';
-import { StyleSheet, View } from 'react-native';
+	//Tạo StackNavigator từ thư viện react-navigation
+	const AppNavigator = StackNavigator({
+	    HOME: {
+	        screen: Screens.Home
+	    },
+	    STYLES: {
+	        screen: Screens.StyleDemo
+	    },
+	    COMPONENT: {
+	        screen: Screens.Components
+	    },
+	    PROPS: {
+	        screen: Screens.Props
+	    }
+	}, {
+	        headerMode: "screen"
+	    });
+	
+	export default class App extends Component {
+	    render() {
+	        return (
+	            <View style={styles.container}>
+						{/*Vẽ stack ứng dụng ra màn hình*/}
+	                <AppNavigator />
+	            </View>
+	        );
+	    }
+	}
+	
+	const styles = StyleSheet.create({
+	    container: {
+	        flex: 1
+	    }
+	});
 
-// import toàn bộ các class Screen từ modules/screens (những class được xuất thông qua file modules/screens/index.js)
-import * as Screens from './modules/screens';
+  ```
 
+ Như bạn thấy ở trên ta khai báo 1 ứng dụng có 4 màn hình HOME, STYLES, COMPONENT, PROPS. Mặc định màn hình nào ở trên cùng sẽ được xuất hiện đầu tiên. <br>Nội dung mỗi màn hình có dạng:
 
-//Tạo StackNavigator từ thư viện react-navigation
-const AppNavigator = StackNavigator({
-    HOME: {
-        screen: Screens.Home
-    },
-    STYLES: {
-        screen: Screens.StyleDemo
-    },
-    COMPONENT: {
-        screen: Screens.Components
-    },
-    PROPS: {
-        screen: Screens.Props
-    }
-}, {
-        headerMode: "screen"
-    });
+	```
+	HOME: {
+		screen: Screens.Home
+	}
+	```
+ Trong đó Screens.Home là class được import từ module screens.<br>Lưu ý dòng lệnh: 
 
-export default class App extends Component {
-    render() {
-        return (
-            <View style={styles.container}>
-					{/*Vẽ stack ứng dụng ra màn hình*/}
-                <AppNavigator />
-            </View>
-        );
-    }
-}
+	```import * as Screens from './modules/screens'; ```   
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    }
-});
+ Dòng lệnh này thực hiện import toàn bộ những class được xuất ra thông qua file index.js. Vì vậy nếu bạn thêm màn hình mới lưu ý vào file index.js để xuất thêm class bạn vừa tạo.
 
-```
-Như bạn thấy ở trên ta khai báo 1 ứng dụng có 4 màn hình HOME, STYLES, COMPONENT, PROPS. Mặc định màn hình nào ở trên cùng sẽ được xuất hiện đầu tiên. <br>Nội dung mỗi màn hình có dạng:
+  - Chuyển đổi màn hình: có 2 cách chuyển màn hình:
+   	 - Chuyển đổi và xóa toàn bộ màn hình trước đó:
 
-```
-HOME: {
-	screen: Screens.Home
-}
-```
-Trong đó Screens.Home là class được import từ module screens.<br>Lưu ý dòng lệnh: 
-
-```import * as Screens from './modules/screens'; ```   
-
-Dòng lệnh này thực hiện import toàn bộ những class được xuất ra thông qua file index.js. Vì vậy nếu bạn thêm màn hình mới lưu ý vào file index.js để xuất thêm class bạn vừa tạo.
-
-  - Chuyển đổi màn hình:
-   
- Có 2 cách chuyển màn hình:
-   - Chuyển đổi và xóa toàn bộ màn hình trước đó:
-	 
-	 	```
-	 	// chuyển qua màn hình PROPS đã khai báo trong App StackNavigator
-	 	let pageContinue = NavigationActions.reset({
-      		index: 0,
-      		actions: [NavigationActions.navigate({ routeName: "PROPS", params: {} })]
-      	});
-		this.props.navigation.dispatch(pageContinue);
-		
-	 	```
-	 	
- params: {} - Đây là phần để bạn truyền dữ liệu qua màn hình kế tiếp. Bạn có thể truyền qua cho màn hình tiếp theo một đối tượng theo cú pháp này.
-	 	
-	 -  Chuyển đổi và giữ lại màn hình trước để quay lại
-
-	 	```
-		// chuyển qua màn hình PROPS đã khai báo trong App StackNavigator
+   	 ```
+   	 // chuyển qua màn hình PROPS đã khai báo trong App StackNavigator
+	 let pageContinue = NavigationActions.reset({
+	 		index: 0,
+	 		actions: [NavigationActions.navigate({ routeName: "PROPS", params: {} })]
+     });
+     this.props.navigation.dispatch(pageContinue);
+   	 ```
+   	 params: {} - Đây là phần để bạn truyền dữ liệu qua màn hình kế tiếp. Bạn có thể truyền qua cho màn hình tiếp theo một đối tượng theo cú pháp này.
+   	 
+   	 - Chuyển đổi và giữ lại màn hình trước để quay lại
+   	 
+   	 ```
+	 // chuyển qua màn hình PROPS đã khai báo trong App StackNavigator
 	 	this.props.navigation.navigate("PROPS"); 
 	 	//or
 	 	this.props.navigation.navigate("PROPS", {});
-	 	
-	 	```
-	 	
- {} - Đây cũng là cách để bạn truyền một đối tượng qua cho màn hình kế tiếp.<br>Mặc định nếu bạn hiển thị Status bar thì sẽ có phím quay về, nhưng nếu cần thiết có thể quay về bằng cách gọi hàm sau đây:
+     ```
+ 	 	{} - Đây cũng là cách để bạn truyền một đối tượng qua cho màn hình kế tiếp.<br>Mặc định nếu bạn hiển thị Status bar thì sẽ có phím quay về, nhưng nếu cần thiết có thể quay về bằng cách gọi hàm sau đây:
 	 	
 	 	```this.props.navigation.goBack();```
-	 	
-	- Hiển thị Status bar:
-
+   	 
+   	 - Hiển thị Status bar:
+	 
 		```
 		static navigationOptions = ({ navigation }) => {
         	return {
@@ -1058,7 +1052,7 @@ Mình xin dưa ra một số quy chuẩn cơ bản như sau:
 
 Sau những dự án và tìm hiểu trên mạng. Mình có đưa ra mô hình cấu trúc thư mục dự án như sau
 
-![](images/project-structure.jpg)
+!(images/project-structure.jpg)
 
 
 Toàn bộ source code của chương trình sẽ được đặt trong thư mục app:
