@@ -884,8 +884,7 @@ Vào dự án bạn tạo và chạy dòng lệnh sau để cài đặt thư vi�
 
 - Sử dụng thư viện:
  
- - Xây dựng cấu trúc ứng dụng:	
- Để bạn hiểu rõ hơn về phần demo sau bạn vui lòng xem lại file index.js trong Example (Example/app/index.js). Dưới đây là phần tạo cấu trúc sườn của ứng dụng dựa vào StackNavigator của thư viện react-navigation.
+  - Xây dựng cấu trúc ứng dụng: Để bạn hiểu rõ hơn về phần demo sau bạn vui lòng xem lại file index.js trong Example (Example/app/index.js). Dưới đây là phần tạo cấu trúc sườn của ứng dụng dựa vào StackNavigator của thư viện react-navigation.
 	
 	
  ```javascript
@@ -947,8 +946,8 @@ Vào dự án bạn tạo và chạy dòng lệnh sau để cài đặt thư vi�
 
  Dòng lệnh này thực hiện import toàn bộ những class được xuất ra thông qua file index.js. Vì vậy nếu bạn thêm màn hình mới lưu ý vào file index.js để xuất thêm class bạn vừa tạo.
 
-  - Chuyển đổi màn hình: có 2 cách chuyển màn hình:
-   	 - Chuyển đổi và xóa toàn bộ màn hình trước đó:
+   - Chuyển đổi màn hình: có 2 cách chuyển màn hình:
+   	  - Chuyển đổi và xóa toàn bộ màn hình trước đó:
 
    	 ```
    	 // chuyển qua màn hình PROPS đã khai báo trong App StackNavigator
@@ -960,7 +959,7 @@ Vào dự án bạn tạo và chạy dòng lệnh sau để cài đặt thư vi�
    	 ```
    	 params: {} - Đây là phần để bạn truyền dữ liệu qua màn hình kế tiếp. Bạn có thể truyền qua cho màn hình tiếp theo một đối tượng theo cú pháp này.
    	 
-   	 - Chuyển đổi và giữ lại màn hình trước để quay lại
+   	  - Chuyển đổi và giữ lại màn hình trước để quay lại
    	 
    	 ```
 	 // chuyển qua màn hình PROPS đã khai báo trong App StackNavigator
@@ -972,7 +971,7 @@ Vào dự án bạn tạo và chạy dòng lệnh sau để cài đặt thư vi�
 	 	
 	 	```this.props.navigation.goBack();```
    	 
-   	 - Hiển thị Status bar:
+   	  - Hiển thị Status bar:
 	 
 		```
 		static navigationOptions = ({ navigation }) => {
