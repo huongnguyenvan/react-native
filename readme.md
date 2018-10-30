@@ -8,6 +8,7 @@ Chào mừng các bạn đến với hướng dẫn học React-Native cho ngư�
 P/s: Bài viết chủ yếu dựa trên tài liệu chính thống của React-Native phiên bản 0.56 tại <https://facebook.github.io/react-native/docs/getting-started> kết hợp với sự hiểu biết cá nhân của mình vì vậy nếu có sai sót, anh em cứ góp ý để mình sửa đổi nhé.
 
 #Mục Lục
+
 I. Mục tiêu hướng dẫn<br>
 II. Một vài lưu ý<br>
 III. Nội dung hướng dẫn
@@ -1145,7 +1146,34 @@ Lưu ý: Phương thức getLanguagesFromServer() nên gọi trong componentDidM
 Comming soon
 
 ## 14. Lưu trữ dữ liệu
-### 14.1. Storage:
+
+React-Native mặc định hỗ trợ chức năng lưu trữ thông qua AsyncStorage được cung cấp mặc định trong gói thư viện react-native. Xem phần Storage phía dưới để tìm hiểu thêm về phương pháp lưu trữ này. Bên cạnh đó mình xin được giới thiệu phương pháp lưu trữ theo dạng dữ liệu có cấu trúc sử dụng realm database. Theo bản thân mình realm được đánh giá là một trong những thư viện hỗ trợ database tốt và tối ưu cho dân lập trình trên các dòng mobile hiện tại.
+
+### 14.1. AsyncStorage:
+
+Bởi vì AsyncStorage chạy bất đồng bộ vì vậy mình chỉ sử dụng AsyncStorage để lưu một số config của ứng dụng ví dụ như user data hay language code ..., những dữ liệu quan trọng và có cấu trúc thường mình sẽ sử dụng database để lưu trữ, truy xuất nhanh và dễ dàng hơn.
+
+import thư viện AsyncStorage:
+
+```javascript
+import { AsyncStorage } from "react-native";
+```
+
+Sử dụng thư viện:
+
+```javascript
+// lưu trữ dữ liệu theo dạng key -> value (nếu value là một đối tượng thì nên chuyển đổi về JSON trước sử dụng JSON.stringify(obj))
+AsyncStorage.setItem("language", "vi");
+
+
+//Đọc giá trị lên và sử dụng.
+AsyncStorage.getItem("language").then(result => {
+    console.log(result) //return value: vi
+})
+
+```
+
+
 ### 14.2. Database:
 
 ## 15. Đa Ngôn ngữ
