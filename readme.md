@@ -12,42 +12,42 @@ I. Mục tiêu hướng dẫn<br>
 II. Một vài lưu ý<br>
 III. Nội dung hướng dẫn
 
-- 1. Hướng dẫn cài đặt môi trường react-native trên hệ điều hành Windows.
-- 2. Hướng dẫn cài đặt môi trường react-native trên hệ điều hành MAC OS
-- 3. Các IDE khuyên dùng
-- 4. Khởi tạo dự án đầu tiên
-- 5. Các thành phần cơ bản của dự án
-- 6. Component trong React-Native
-  - 6.1. Vòng đời của component
-  - 6.2. Các thành phần cơ bản của component
-  - 6.3. Một số hàm đặc biệt
-  - 6.4. Một vài lưu ý nhỏ khi dùng React-Native
-- 7. Thiết kế View (Style)
-- 8. Kỹ thuật Debug cơ bản
-- 9. Các Component thường sử dụng
-  - 9.1. View
-  - 9.2. Text
-  - 9.3. Image
-  - 9.4. Button
-  - 9.5. TouchableOpacity
-  - 9.6. Flatlist
-- 10. Prop và cách truyền dữ liệu giữa các View (Screen)
-- 11. Cài đặt và sử dụng thư viện
-  - 11.1. Cài đặt thư viện
-  - 11.2. Link thư viện
-  - 11.3. Chỉnh sửa thư viện
-- 12. Chuyển đổi giữa các màn hình
-- 13. Giao tiếp Client vs Server
-  - 13.1. RESTful API.
-  - 13.2. Websocket
-- 14. Lưu trữ dữ liệu
-  - 14.1. Storage:
-  - 14.2. Database:
-- 15. Đa Ngôn ngữ
-- 16. Giao tiếp với Native
-- 17. Quy chuẩn tên biến và cấu trúc chương trình
-   - 17.1. Tên biến và tên hàm:
-   - 17.2. Cấu trúc chương trình:
+- 1.Hướng dẫn cài đặt môi trường react-native trên hệ điều hành Windows.
+- 2.Hướng dẫn cài đặt môi trường react-native trên hệ điều hành MAC OS
+- 3.Các IDE khuyên dùng
+- 4.Khởi tạo dự án đầu tiên
+- 5.Các thành phần cơ bản của dự án
+- 6.Component trong React-Native
+  - 6.1.Vòng đời của component
+  - 6.2.Các thành phần cơ bản của component
+  - 6.3.Một số hàm đặc biệt
+  - 6.4.Một vài lưu ý nhỏ khi dùng React-Native
+- 7.Thiết kế View (Style)
+- 8.Kỹ thuật Debug cơ bản
+- 9.Các Component thường sử dụng
+  - 9.1.View
+  - 9.2.Text
+  - 9.3.Image
+  - 9.4.Button
+  - 9.5.TouchableOpacity
+  - 9.6.Flatlist
+- 10.Prop và cách truyền dữ liệu giữa các View (Screen)
+- 11.Cài đặt và sử dụng thư viện
+  - 11.1.Cài đặt thư viện
+  - 11.2.Link thư viện
+  - 11.3.Chỉnh sửa thư viện
+- 12.Chuyển đổi giữa các màn hình
+- 13.Giao tiếp Client vs Server
+  - 13.1.RESTful API.
+  - 13.2.Websocket
+- 14.Lưu trữ dữ liệu
+  - 14.1.Storage:
+  - 14.2.Database:
+- 15.Đa Ngôn ngữ
+- 16.Giao tiếp với Native
+- 17.Quy chuẩn tên biến và cấu trúc chương trình
+   - 17.1.Tên biến và tên hàm:
+   - 17.2.Cấu trúc chương trình:
 
 
 # I. Mục tiêu hướng dẫn
