@@ -7,6 +7,49 @@ Chào mừng các bạn đến với hướng dẫn học React-Native cho ngư�
 
 P/s: Bài viết chủ yếu dựa trên tài liệu chính thống của React-Native phiên bản 0.56 tại <https://facebook.github.io/react-native/docs/getting-started> kết hợp với sự hiểu biết cá nhân của mình vì vậy nếu có sai sót, anh em cứ góp ý để mình sửa đổi nhé.
 
+#Mục Lục
+I. Mục tiêu hướng dẫn<br>
+II. Một vài lưu ý<br>
+III. Nội dung hướng dẫn
+
+- 1. Hướng dẫn cài đặt môi trường react-native trên hệ điều hành Windows.
+- 2. Hướng dẫn cài đặt môi trường react-native trên hệ điều hành MAC OS
+- 3. Các IDE khuyên dùng
+- 4. Khởi tạo dự án đầu tiên
+- 5. Các thành phần cơ bản của dự án
+- 6. Component trong React-Native
+  - 6.1. Vòng đời của component
+  - 6.2. Các thành phần cơ bản của component
+  - 6.3. Một số hàm đặc biệt
+  - 6.4. Một vài lưu ý nhỏ khi dùng React-Native
+- 7. Thiết kế View (Style)
+- 8. Kỹ thuật Debug cơ bản
+- 9. Các Component thường sử dụng
+  - 9.1. View
+  - 9.2. Text
+  - 9.3. Image
+  - 9.4. Button
+  - 9.5. TouchableOpacity
+  - 9.6. Flatlist
+- 10. Prop và cách truyền dữ liệu giữa các View (Screen)
+- 11. Cài đặt và sử dụng thư viện
+  - 11.1. Cài đặt thư viện
+  - 11.2. Link thư viện
+  - 11.3. Chỉnh sửa thư viện
+- 12. Chuyển đổi giữa các màn hình
+- 13. Giao tiếp Client vs Server
+  - 13.1. RESTful API.
+  - 13.2. Websocket
+- 14. Lưu trữ dữ liệu
+  - 14.1. Storage:
+  - 14.2. Database:
+- 15. Đa Ngôn ngữ
+- 16. Giao tiếp với Native
+- 17. Quy chuẩn tên biến và cấu trúc chương trình
+   - 17.1. Tên biến và tên hàm:
+   - 17.2. Cấu trúc chương trình:
+
+
 # I. Mục tiêu hướng dẫn
 
 - Hiểu được các thành phần cơ bản của React-Native.
@@ -17,17 +60,17 @@ P/s: Bài viết chủ yếu dựa trên tài liệu chính thống của React-
 
 # II. Một vài lưu ý
 - Bài viết nhắm tới các bạn đã có cơ bản về javascript nhất là quen với ES6. Nếu bạn chưa biết về javascript vui lòng tìm hiểu javascript cơ bản ít nhất bạn cần nắm vững những kiến thức sau (bạn có thể tự tìm hiểu tại <https://freetuts.net/hoc-javascript/javascript-can-ban>):
- - Biến và toán tử trong javascript
- - Lệnh If...else
- - Lệnh Switch..case
- - Vòng lặp white
- - Vòng lặp for
- - Vòng lặp for...in
- - Viết hàm thực thi các tác vụ cơ bản
- - Mảng: (duyệt mảng lấy các phần tử)
+  - Biến và toán tử trong javascript
+  - Lệnh If...else
+  - Lệnh Switch..case
+  - Vòng lặp white
+  - Vòng lặp for
+  - Vòng lặp for...in
+  - Viết hàm thực thi các tác vụ cơ bản
+  - Mảng: (duyệt mảng lấy các phần tử)
 
 - Nếu biết về css thì đó cũng là một điểm lợi thế. Bạn có thể tìm hiểu thêm tại đây <https://freetuts.net/css-la-gi-hoc-css-nhu-the-nao-327.html>
-- Hiện tại hệ điều hành Windowns chỉ build được ứng dụng Android.
+- Hiện tại hệ điều hành Windows chỉ build được ứng dụng Android.
 - Hệ điều hành IOS có thể build được cả Android và IOS.
 - Phiên bản IOS thấp nhất mà react-native có thể hỗ trợ là IOS 8.0
 - Phiên bản Android thấp nhất mà react-native có thể hỗ trợ là Android 4.1 (API 16)
@@ -38,9 +81,9 @@ P/s: Bài viết chủ yếu dựa trên tài liệu chính thống của React-
 
 
 # III. NỘI DUNG HƯỚNG DẪN
-## 1. Hướng dẫn cài đặt môi trường react-native trên hệ điều hành Windowns.
+## 1. Hướng dẫn cài đặt môi trường react-native trên hệ điều hành Windows.
 
-- **Bước 1**: Cài đặt Chocolatey từ <https://chocolatey.org> (Chocolatey là trình quản lý các gói thư viện của Windowns)
+- **Bước 1**: Cài đặt Chocolatey từ <https://chocolatey.org> (Chocolatey là trình quản lý các gói thư viện của Windows)
 - **Bước 2**: Cài đặt Nodejs Java và Python 2 thông qua Chocolatey sử dụng dòng lệnh sau (dùng cmd để chạy lệnh này):<br>
 ```choco install -y nodejs.install python2 jdk8```
 
@@ -48,7 +91,7 @@ P/s: Bài viết chủ yếu dựa trên tài liệu chính thống của React-
 - **Bước 4**: Cài đặt SDK: Nên cài SDK Platform 23 vì mặc định react-native hiện tại sử dụng Android SDK Platform 23 để build ứng dụng 
 
 
-Lưu ý: Trên hệ điều hành windowns chỉ có thể build ứng dụng trên Android.
+Lưu ý: Trên hệ điều hành windows chỉ có thể build ứng dụng trên Android.
 ## 2. Hướng dẫn cài đặt môi trường react-native trên hệ điều hành MAC OS
 
 - **Bước 1**: Cài đặt Brew: Brew là trình quản lý các gói thứ viện, MACOS không tích hợp sẵn và bạn phải sử dụng terminal để cài đặt brew bằng cách chạy dòng lệnh sau. <br>
@@ -1067,7 +1110,7 @@ return this.fetchData(api, 'POST', body);
 // Phương thức POST trên server này không hỗ trợ nên ắt hẳn không hoạt động rồi. Mình chỉ muốn demo cho các bạn biết cách gọi phương thức khác ntn thôi. =))
 ```
 
-- Cách sử dụng đối tượng RESTClient
+- Cách sử dụng RESTClient
 
 
 ```javascript
@@ -1094,7 +1137,7 @@ getLanguagesFromServer() {
 
 ```
 
-Lưu ý: Phương thức getLanguagesFromServer nên gọi trong componentDidMount() hoặc các sự kiện sau khi constructor() hoàn tất để trách những lỗi có nguy cơ tiềm ẩn ví dụ như api nhanh quá, contrucstor chạy chưa xong và nó đi setState() thì app của bạn nó làm việc không đúng.
+Lưu ý: Phương thức getLanguagesFromServer() nên gọi trong componentDidMount() hoặc các sự kiện sau khi constructor() hoàn tất để trách những lỗi có nguy cơ tiềm ẩn ví dụ như api nhanh quá, contrucstor chạy chưa xong và nó đi setState() thì app của bạn nó làm việc không đúng.
 
 
 
