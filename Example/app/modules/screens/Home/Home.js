@@ -4,6 +4,7 @@ import {
     View,
     Text,
     TouchableOpacity,
+    AsyncStorage,
 } from 'react-native';
 import Styles from './styles';
 // import AppConfig from '../../../configs/config';
@@ -30,6 +31,10 @@ export class Home extends React.Component {
     }
 
 
+    componentDidMount() {
+        this.demoStorage();
+    }
+
     onPressStyle() {
         this.props.navigation.navigate("STYLES")
     }
@@ -46,6 +51,20 @@ export class Home extends React.Component {
     onPressRestFul() {
         this.props.navigation.navigate(SCREENS.RESTFUL)
     }
+
+
+    //Hướng dẫn cách sử dụng Storage
+    demoStorage() {
+        //save key -> value
+        AsyncStorage.setItem("language", "vi");
+        AsyncStorage.getItem("language").then(result => {
+            console.log(result) //return value: vi
+        })
+    }
+
+
+
+
 
     render() {
         return (
