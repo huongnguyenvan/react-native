@@ -7,7 +7,7 @@ Chào mừng các bạn đến với hướng dẫn học React-Native cho ngư�
 
 P/s: Bài viết chủ yếu dựa trên tài liệu chính thống của React-Native phiên bản 0.56 tại <https://facebook.github.io/react-native/docs/getting-started> kết hợp với sự hiểu biết cá nhân của mình vì vậy nếu có sai sót, anh em cứ góp ý để mình sửa đổi nhé.
 
-#Mục Lục
+# Mục Lục
 
 I. Mục tiêu hướng dẫn<br>
 II. Một vài lưu ý<br>
@@ -1168,13 +1168,18 @@ AsyncStorage.setItem("language", "vi");
 
 //Đọc giá trị lên và sử dụng.
 AsyncStorage.getItem("language").then(result => {
-    console.log(result) //return value: vi
+    console.log(result) //in ra màn hình console: vi
 })
 
 ```
 
 
 ### 14.2. Database:
+
+Thông thường mình sẽ dùng realm để lưu trữ các dữ liệu có cấu trúc. Mình xin demo nhỏ về một phần mềm quản lý, chỉnh sửa danh sách sinh viên:
+
+
+
 
 ## 15. Đa Ngôn ngữ
 
