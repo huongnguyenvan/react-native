@@ -1261,9 +1261,6 @@ Toàn bộ source code của chương trình sẽ được đặt trong thư m�
   
   ### Đến đây là kết thúc bài hướng dẫn của mình rồi. Hy vọng bài hướng dẫn sẽ giúp bạn có được những cái nhìn tổng quan về React-Native để xây dựng một ứng dụng cho riêng mình.
   ### P/S: Nếu có thời gian mình sẽ viết tiếp về cách xây dựng 1 ứng dụng đọc báo hoàn chỉnh trên Android và iOS. Cho Star để mình lấy động lực nhé.
-  Aboutme: <https://fb.me/gnouh>
-
-
 
 
 
